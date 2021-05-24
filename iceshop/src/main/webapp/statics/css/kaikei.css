@@ -1,0 +1,52 @@
+﻿
+
+
+
+/* .calculator{
+    height: 300px;
+} */
+table.calculator{
+    margin-left:auto; 
+    margin-right:auto;
+    border-spacing: 0px;
+  }
+.calculator button{
+    margin:0px;
+    font-size:45px;
+}
+.calculator td{
+    padding:2px;
+    margin:0px;
+    font-size: large;
+    width: 100px;
+    height:60px;
+}
+.calculatorBody{
+    margin-top: 0px;
+    margin-bottom:0px;
+    /* height:300px; */
+}
+ .calculator tr{
+    padding:0px;
+    margin-bottom:0px;
+    border-spacing: 0px;
+}
+/* .calculator{
+    border-spacing: 0px;
+}  */
+#money{
+    margin-left:60px;
+    margin-top:20px;
+    width: 80%;
+    
+} */
+#backbutton{
+    margin-left: 100px;
+    align-items: left;
+    display:flexbox;
+}
+#confirm{
+    margin-top:30px;
+    margin-right:200px;
+　　
+}
