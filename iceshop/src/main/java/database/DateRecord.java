@@ -51,46 +51,53 @@ public class DateRecord extends HttpServlet {
 			Statement stm = con.createStatement();
 
 
-			// UPDATEを実行し、結果表(ResultSet)を取得
-				// ordersテーブルの消費税(tax_id)にvalueをUPDATEする
-				String sql1 = "UPDATE taxs SET tax_id = 15 where tax_name='テイクアウト'";
-				int num1 = stm.executeUpdate(sql1);
-				ResultSet rs1 = stm.executeQuery(sql1);
 
-				// ordersテーブルの受取金額(order_recieved_amount)を10にUPDATEする
-				String sql2 = "UPDATE orders SET order_recieved_amount = 10 order_id = 1 IS NULL";
-				int num2 = stm.executeUpdate(sql2);
-				ResultSet rs2 = stm.executeQuery(sql2);
-
-				// ordersテーブルの合計金額(order_total_amount)の更新作業
-				String sql3 = "UPDATE orders SET order_total_amount = 20 WHERE order_id = 1 IS NULL";
-				int num3 = stm.executeUpdate(sql3);
-				ResultSet rs3 = stm.executeQuery(sql3);
-
-				// pricesテーブルの割引(extra_id)にvalueをUPDATEする
-				String sql4 = "UPDATE discounts SET discount_id = 20 where discount_name='10%'";
-				int num4 = stm.executeUpdate(sql4);
-				ResultSet rs4 = stm.executeQuery(sql4);
-
-				// productsテーブルの支払い方法(paymethod_id)にvalueをUPDATEする
-				String sql5 = "UPDATE paymethods SET paymethod_id = 30 where paymethod_name='cash'";
-				int num5 = stm.executeUpdate(sql5);
-				ResultSet rs5 = stm.executeQuery(sql5);
-
-				//productsテーブルの小計(product_subtotal_amount)の更新作業
-				String sql6 = "UPDATE products SET product_subtotal_amount = 10 WHERE product_id = 1";
-				int num6 = stm.executeUpdate(sql6);
-				ResultSet rs6 = stm.executeQuery(sql6);
-
-				// productsテーブルの注文数(product_quantity)の更新作業
-				String sql7 = "UPDATE products SET product_quantity = 30 WHERE product_id = 1 IS NULL";
-				int num7 = stm.executeUpdate(sql7);
-				ResultSet rs7 = stm.executeQuery(sql7);
+			// ordersテーブルの消費税(tax_id)にvalueをUPDATEする
+            String sql1 = "UPDATE taxs SET tax_id = 15 where tax_name='テイクアウト'";
+            int num1 = stm.executeUpdate(sql1);
+            ResultSet rs1 = stm.executeQuery(sql1);
 
 
-			out.println("</body>");
-			out.println("</html>");
 
+            // ordersテーブルの受取金額(order_recieved_amount)を10にUPDATEする
+            String sql2 = "UPDATE orders SET order_recieved_amount = 10 order_id = 1 IS NULL";
+            int num2 = stm.executeUpdate(sql2);
+            ResultSet rs2 = stm.executeQuery(sql2);
+
+
+
+            // ordersテーブルの合計金額(order_total_amount)の更新作業
+            String sql3 = "UPDATE orders SET order_total_amount = 20 WHERE order_id = 1 IS NULL";
+            int num3 = stm.executeUpdate(sql3);
+            ResultSet rs3 = stm.executeQuery(sql3);
+
+
+
+            // pricesテーブルの割引(extra_id)にvalueをUPDATEする
+            String sql4 = "UPDATE discounts SET discount_id = 20 where discount_name='10%'";
+            int num4 = stm.executeUpdate(sql4);
+            ResultSet rs4 = stm.executeQuery(sql4);
+
+
+
+            // productsテーブルの支払い方法(paymethod_id)にvalueをUPDATEする
+            String sql5 = "UPDATE paymethods SET paymethod_id = 30 where paymethod_name='cash'";
+            int num5 = stm.executeUpdate(sql5);
+            ResultSet rs5 = stm.executeQuery(sql5);
+
+
+
+            //productsテーブルの小計(product_subtotal_amount)の更新作業
+            String sql6 = "UPDATE products SET product_subtotal_amount = 10 WHERE product_id = 1";
+            int num6 = stm.executeUpdate(sql6);
+            ResultSet rs6 = stm.executeQuery(sql6);
+
+
+
+            // productsテーブルの注文数(product_quantity)の更新作業
+            String sql7 = "UPDATE products SET product_quantity = 30 WHERE product_id = 1 IS NULL";
+            int num7 = stm.executeUpdate(sql7);
+            ResultSet rs7 = stm.executeQuery(sql7);
 
 		}catch(SQLException e) {
 			System.out.println("MySQLに接続できませんでした。");
