@@ -2,6 +2,10 @@ package ajax;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,21 +35,32 @@ public class RecieveIceDatas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		try {
 		// 送信されたJSONの取得
 		BufferedReader buffer = new BufferedReader(request.getReader());
 		String reqJson = buffer.readLine();
 		System.out.println(reqJson);
 		
     	// String json = "{\"ices\":[{\"product_num\":0,\"icenum\":1,\"container\":2,\"quantity\":1,\"ice\":[[0,3],[null,null],[null,null]],\"price\":520,\"is_active\":true},{\"product_num\":1,\"icenum\":2,\"container\":1,\"quantity\":1,\"ice\":[[3,2],[8,1],[null,null]],\"price\":620,\"is_active\":true}]}";
-		try {
+		
 		ObjectMapper mapper = new ObjectMapper();
-		System.out.println("MAPPER");
 		JsonObject jo = mapper.readValue(reqJson, JsonObject.class);
-		System.out.println("JO");
     	
     	List<Ices> icelist = new ArrayList<Ices>();
     	icelist = jo.getIces();
     	System.out.println(icelist.get(0).getContainer());
+    	
+		Connection con = (Connection) DriverManager.getConnection(
+				"jdbc:mysql://localhost/iceshop?serverTimezone=JST&useUnicode=true&characterEncoding=UTF-8",
+				"root", "root");
+		Statement stmt = con.createStatement();
+		
+		String shows = "SELECT * FROM orders";
+		ResultSet rs = stmt.executeQuery(shows);
+		while(rs.next()) {
+			System.out.println(rs.getInt("product_id"));
+		}
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
