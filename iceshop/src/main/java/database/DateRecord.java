@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Main1
  */
-@WebServlet("/Taxnado")
+@WebServlet("/Taxnado_a")
 public class DateRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
