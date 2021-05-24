@@ -23,7 +23,8 @@ import packw.JsonObject;
 public class JsonTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("GET");
 
@@ -32,25 +33,22 @@ public class JsonTest extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("POST START");
-		
+
 		// 送信されたJSONの取得
 		BufferedReader buffer = new BufferedReader(request.getReader());
 		String reqJson = buffer.readLine();
-		System.out.println("JSON READ");
 		System.out.println(reqJson);
-		
+
     	String json = "{\"ices\":[{\"product_num\":0,\"icenum\":1,\"container\":2,\"quantity\":1,\"ice\":[[0,3],[null,null],[null,null]],\"price\":520,\"is_active\":true},{\"product_num\":1,\"icenum\":2,\"container\":1,\"quantity\":1,\"ice\":[[3,2],[8,1],[null,null]],\"price\":620,\"is_active\":true}]}";
-		
+
 		ObjectMapper mapper = new ObjectMapper();
-		System.out.println("ObjectMapper");
 		JsonObject jo = mapper.readValue(json, JsonObject.class);
-		
-		
-		System.out.println("JSON COMBARTED");
-    	
+
+
     	List<Ices> icelist = new ArrayList<Ices>();
     	icelist = jo.getIces();
     	System.out.println(icelist.get(0).getContainer());
