@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import packw.Ices;
-import packw.JsonObject;
+import ajax.Ices;
+import ajax.JsonObject;
 
 @WebServlet("/JsonTest")
 @JsonIgnoreProperties(ignoreUnknown=true)

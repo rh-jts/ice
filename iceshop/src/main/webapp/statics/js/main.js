@@ -107,27 +107,29 @@ class Products {
 
   // アイス情報を送信用JSONに整形する
   formatProducts = () => {
-    let formatted_products = { ices: [] };
+    let formatted_products = { "ices": [], "tax_discounts": this.extras };
     Object.values(this.products).forEach((v, i) => {
-      formatted_products.Ices[i] = v;
+      if (v.is_active == true) {
+        formatted_products.ices[i] = v;
+      }
     });
 
-    const submit_json = JSON.stringify(JSON.stringify(formatted_products));
+    const submit_json = JSON.stringify(formatted_products);
 
     return submit_json;
   };
 
   // Ajaxでアイス情報を送信する
   submitIceDatas = () => {
-    const url = "http://localhost:8080/iceshop/JsonTest";
-    submit_body_json = formatProducts();
+    const url = "http://localhost:8080/iceshop/RecieveIceDatas";
+    const submit_body_json = this.formatProducts();
 
     fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: str_json,
+      body: submit_body_json,
     })
       .then((response) => {
         if (!respons.ok) {
@@ -142,7 +144,6 @@ class Products {
         console.error(e);
       });
   };
-
 }
 
 let count = 0;
@@ -538,7 +539,13 @@ document.getElementById("btn_add").addEventListener("click", () => {
   ice.clearCurrentIce();
 });
 
-document.getElementById("cash").addEventListener("click", () => {});
+// 支払いボタン設定
+document.getElementById("cash").addEventListener("click", () => {
+  ice.submitIceDatas();
+});
+document.getElementById("credit").addEventListener("click", () => {
+  ice.submitIceDatas();
+});
 
 // ----------   モーダル設定 ----------
 let myModal = document.getElementById("myModal");
