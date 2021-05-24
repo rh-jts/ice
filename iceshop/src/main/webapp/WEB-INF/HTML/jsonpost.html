@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+aaaaaaaaaa
+    <script>
+      {
+        const url = "http://localhost:8080/iceshop/JsonTest";
+        const post_json = {"ices":[{"product_num":0,"icenum":1,"container":0,"quantity":1,"ice":[[0,3],[null,null],[null,null]],"price":520,"is_active":true},{"product_num":1,"icenum":2,"container":1,"quantity":1,"ice":[[1,1],[3,2],[null,null]],"price":620,"is_active":true}]};
+        const str_json = JSON.stringify(JSON.stringify(post_json));
+
+        console.log(str_json);
+        console.log(JSON.stringify(str_json));
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: str_json,
+      })
+        .then((response) => {
+          if (!respons.ok) {
+            throw new Error(`${res.status} ${res.statusText}`);
+        }
+          return response.json();
+        })
+        .then((json) => {
+          console.log(json);
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+      }
+    </script>
+  </body>
+</html>
