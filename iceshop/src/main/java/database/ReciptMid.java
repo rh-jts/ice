@@ -8,6 +8,9 @@ public class ReciptMid implements Serializable{
 	private String siz;
 	private String ice;
 	private String con;
+	private String gou;
+	private String shou;
+	private String tax;
 
 
 	public ReciptMid() {
@@ -21,6 +24,12 @@ public class ReciptMid implements Serializable{
 		this.ice = ice;
 		this.con = con;
 
+	}
+
+	public ReciptMid(String gou, String shou , String tax) {
+		this.gou = gou;
+		this.shou = shou;
+		this.tax = tax;
 	}
 
 	//フレーバー
@@ -56,15 +65,30 @@ public class ReciptMid implements Serializable{
 	}
 
 
+	public String getGou() {
+		return gou;
+	}
+	public void  setGou(String gou) {
+		this.gou = gou;
+	}
 
 
 
+	public String getShou() {
+		return shou;
+	}
+	public void  set(String flv) {
+		this.flv = flv;
+	}
 
 
 
-
-
-
+	public String getTax() {
+		return tax;
+	}
+	public void  setTax(String Tax) {
+		this.tax = tax;
+	}
 
 
 

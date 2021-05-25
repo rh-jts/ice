@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -15,8 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import database.ReciptMid;
 
 
 @WebServlet("/receipt")
@@ -90,7 +86,7 @@ public class ReceiptServlet extends HttpServlet {
             ResultSet rs7 = stmt.executeQuery(sql7);
             */
 
-
+/
 			//主キーと外部キーの設定
 			//orderに格納
 			String paym = "INSERT INTO orders(paymethod_id) SELECT paymethod_id from paymethods";
@@ -169,7 +165,7 @@ public class ReceiptServlet extends HttpServlet {
 			System.out.println(e.getMessage());
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
