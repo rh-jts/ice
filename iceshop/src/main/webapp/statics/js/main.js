@@ -5,6 +5,8 @@ class Products {
   constructor() {
     this.products = [];
     this.extras = [0, 0];
+    this.subtotal = 0;
+    this.total = 0;
     this.bread = [];
     this.icenum_names = ["シングル", "ダブル", "トリプル"];
     this.container_names = ["コーン", "カップ", "ワッフル"];
@@ -41,21 +43,21 @@ class Products {
   };
 
   redrawTotals = () => {
-    let subtotal = 0;
-    let total = 0;
+    this.subtotal = 0;
+    this.total = 0;
 
     Object.values(this.products).forEach((v) => {
-      subtotal += v.is_active ? v.price * v.quantity : 0;
+      this.subtotal += v.is_active ? v.price * v.quantity : 0;
     });
 
-    total = Math.round(
-      (parseFloat(this.extras[1] - this.extras[0]) / 100.0 + 1) * subtotal
+    this.total = Math.round(
+      (parseFloat(this.extras[1] - this.extras[0]) / 100.0 + 1) * this.subtotal
     );
 
-    document.getElementById("subtotal").innerText = `￥${subtotal}`;
+    document.getElementById("subtotal").innerText = `￥${this.subtotal}`;
     document.getElementById("discount").innerText = `${this.extras[0]}%`;
     document.getElementById("tax").innerText = `${this.extras[1]}%`;
-    document.getElementById("total").innerText = `￥${total}`;
+    document.getElementById("total").innerText = `￥${this.total}`;
   };
 
   changeProductQuantity = (product_num, is_plus) => {
@@ -107,7 +109,7 @@ class Products {
 
   // アイス情報を送信用JSONに整形する
   formatProducts = () => {
-    let formatted_products = { "ices": [], "tax_discounts": this.extras };
+    let formatted_products = { "ices": [], "tax_discounts": this.extras, "total" : this.total};
     Object.values(this.products).forEach((v, i) => {
       if (v.is_active == true) {
         formatted_products.ices[i] = v;
