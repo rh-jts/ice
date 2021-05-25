@@ -7,22 +7,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Ices {
 	public int container;
-	public List<List<String>> ice;
+	public List<List<Integer>> ice;
 	public int icenum;
 	public boolean is_active;
 	public int price;
 	public int product_num;
 	public int quantity;
+	
 	public int getContainer() {
 		return container;
 	}
 	public void setContainer(int container) {
 		this.container = container;
 	}
-	public List<List<String>> getIce() {
+	public List<List<Integer>> getIce() {
 		return ice;
 	}
-	public void setIce(List<List<String>> ice) {
+	public void setIce(List<List<Integer>> ice) {
 		this.ice = ice;
 	}
 	public int getIcenum() {
