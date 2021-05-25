@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class DataBaseCon
  */
-@WebServlet("/DataBaseCon")
+@WebServlet("/DataBaseConR")
 public class DataBaseConR extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
