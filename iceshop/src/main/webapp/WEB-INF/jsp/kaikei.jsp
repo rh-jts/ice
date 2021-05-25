@@ -121,13 +121,7 @@
         </table>
     <div class="text-right" id="confirm">
         <a href="https://stackoverflow.com/">
-        	<button type="button"
-        		class="btn btn-outline-danger"
-        		style="font-size:20px;
-        		width:100px;
-        		height:50px;
-        		margin-top:-150px;
-        		margin-left:700px">
+        	<button type="button" class="btn btn-outline-danger" style="font-size:20px; width:100px; height:50px; margin-top:-150px; margin-left:700px">
         		確定
         	</button>
         </a>
