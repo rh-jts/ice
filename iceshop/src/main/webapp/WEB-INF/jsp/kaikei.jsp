@@ -73,7 +73,7 @@
             </tr>
             <tr>
             <th >釣銭</th>
-                <td><input type="number" name="otsuri"id="otsuri">円</td>
+                <td><form action="/Receipt.jsp" method="post"><input type="number" name="otsuri"id="otsuri">円</form></td>
             </tr>
         </table>
 
