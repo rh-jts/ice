@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import="MainProg.Data"%>
+	<%@ page import="database.Data"%>
 	<%
 	Data data = (Data) request.getAttribute("data");
 	%>

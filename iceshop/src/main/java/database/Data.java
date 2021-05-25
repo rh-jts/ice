@@ -1,4 +1,4 @@
-package MainProg;
+package database;
 
 public class Data {
 	private int ordertotal;
