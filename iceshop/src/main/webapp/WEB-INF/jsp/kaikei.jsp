@@ -61,7 +61,7 @@
         <a href="https://stackoverflow.com/">
         <button id="backButton" type="button" class="btn btn-outline-primary" >戻る</button>
         </a>
-        <form action="/Receipt.jsp" method="post">
+
         <table class="table table-striped" id="money">
             <tr>
 		<th>合計金額</th>
@@ -69,7 +69,7 @@
             </tr>
             <tr>
             <th>受取金額</th>
-                <td><input type="number" name="uketori" id="result" onchange="otsuriKeisan()" size="50px"> 円</td>
+                <td><form action="/Receipt.jsp" method="post"><input type="number" name="uketori" id="result" onchange="otsuriKeisan()" size="50px"> 円</form></td>
             </tr>
             <tr>
             <th >釣銭</th>
@@ -133,6 +133,5 @@
         <input type="submit" class="btn btn-outline-danger" style="font-size:20px; width:100px; height:50px; margin-top:-150px; margin-left:700px" value="確定">
         </a>
     </div>
-    </form>
 </body>
 </html>

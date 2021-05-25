@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -13,6 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import database.ReciptMid;
 
 
 @WebServlet("/receipt")
@@ -86,7 +90,7 @@ public class ReceiptServlet extends HttpServlet {
             ResultSet rs7 = stmt.executeQuery(sql7);
             */
 
-/
+/*
 			//主キーと外部キーの設定
 			//orderに格納
 			String paym = "INSERT INTO orders(paymethod_id) SELECT paymethod_id from paymethods";
@@ -117,11 +121,12 @@ public class ReceiptServlet extends HttpServlet {
 			int upd10 = stmt.executeUpdate(siz2);
 			int upd11 = stmt.executeUpdate(icen2);
 
+*/
 			//レシート画面に出力するアイスの情報
 			String flvinfo = "SELECT details.flavor_id, flavor_name from details,flavors where details.flavor_id=flavors.flavor_id";
 			String sizinfo = "SELECT details.size_id, size_name from details,sizes where details.size_id=sizes.size_id";
-			String iceinfo = "SELECT products.icenum_id, icenum_name from products where products.icenum_id = icenums.icenum_id";
-			String coninfo = "SELECT products.containe_id, container_name from products where products.container_id = containers.container_id";
+			String iceinfo = "SELECT products.icenum_id, icenum_name from products,icenums where products.icenum_id = icenums.icenum_id";
+			String coninfo = "SELECT products.container_id, container_name from products, containers where products.container_id = containers.container_id";
 			String gouinfo ="SELECT order_total_amount from orders ";
 
 
@@ -132,12 +137,14 @@ public class ReceiptServlet extends HttpServlet {
 			PreparedStatement pstmt2 = con.prepareStatement(sizinfo);
 			PreparedStatement pstmt3 = con.prepareStatement(iceinfo);
 			PreparedStatement pstmt4 = con.prepareStatement(coninfo);
+			PreparedStatement pstmt5 = con.prepareStatement(gouinfo);
 
 			//ResultSetインスタンスにSELECT文の内容を格納
 			ResultSet infoset1 = pstmt1.executeQuery();
 			ResultSet infoset2 = pstmt2.executeQuery();
 			ResultSet infoset3 = pstmt3.executeQuery();
 			ResultSet infoset4 = pstmt4.executeQuery();
+			ResultSet infoset5 = pstmt5.executeQuery();
 
 			while (infoset1.next()) { //フレーバーの数だけ繰り返す
 				//---idに---_nameを格納する
@@ -152,9 +159,11 @@ public class ReceiptServlet extends HttpServlet {
 				request.setAttribute("recinfo", recinfo);
 			}
 
-
 			out.println("</body>");
 			out.println("</html>");
+
+		//	String gouid = infoset5.getString("order_total_amount");
+			//goukei g = new goukei("goukei",gouid);
 
 			RequestDispatcher recrd = request.getRequestDispatcher("/WEB-INF/jsp/Receipt.jsp");
 			recrd.forward(request, response);
