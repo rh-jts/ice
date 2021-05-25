@@ -60,7 +60,7 @@
             </tr>
             <tr>
             <th>受取金額</th>
-                <td><input type="text" name="uketori" id="result" onchange="otsuriKeisan()" size="50px"> 円</td>
+                <td><input type="number" name="uketori" id="result" onchange="otsuriKeisan()" size="50px"> 円</td>
             </tr>
             <tr>
             <th >釣銭</th>
