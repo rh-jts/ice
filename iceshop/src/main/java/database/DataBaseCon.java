@@ -2,6 +2,10 @@ package database;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,6 +38,12 @@ public class DataBaseCon extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		try {
 			// Class.forName("com.mysql.jdbc.Driver");
+			String drv="com.mysql.cj.jdbc.Driver";
+			try {
+	            Class.forName(drv);
+	        }catch(ClassNotFoundException e) {
+	            System.out.println("ドライバがありません"+e.getMessage());
+	        }
 
 			PrintWriter out = response.getWriter();
 			out.println("<!DOCTYPE html>");
@@ -43,11 +53,15 @@ public class DataBaseCon extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 
-//			Connection con = (Connection) DriverManager.getConnection(
-//					"jdbc:mysql://localhost/iceshop?serverTimezone=JST&useUnicode=true&characterEncoding=UTF-8",
-//					"root", "root");//データベースの情報
-//			Statement stmt = con.createStatement();
-
+			Connection con = (Connection) DriverManager.getConnection(
+					"jdbc:mysql://localhost/iceshop?serverTimezone=JST&useUnicode=true&characterEncoding=UTF-8",
+					"root", "root");//データベースの情報
+			Statement stmt = con.createStatement();
+			
+			String ordertotal ="1234";
+			Data data = new Data();
+			data.setOrderTotal(Integer.parseInt(ordertotal));
+			request.setAttribute("data", data);
 
 			// ordersテーブルの消費税(tax_id)に#####をUPDATEする
 			/*
@@ -95,9 +109,9 @@ public class DataBaseCon extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(credit_url);
 			rd.forward(request, response);
 
-//		} catch (SQLException e) {
-//			System.out.println("MySQLに接続できませんでした。");
-//			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("MySQLに接続できませんでした。");
+			e.printStackTrace();
 
 		} catch (Exception e) {
 		    e.printStackTrace();

@@ -58,7 +58,7 @@ public class RecieveIceDatas extends HttpServlet {
 		String shows = "SELECT * FROM orders";
 		ResultSet rs = stmt.executeQuery(shows);
 		while(rs.next()) {
-			System.out.println(rs.getInt("product_id"));
+			System.out.println(rs.getInt("order_id"));
 		}
 		
 		} catch (Exception e) {

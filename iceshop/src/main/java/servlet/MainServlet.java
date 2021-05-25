@@ -9,19 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.Data;
-
 /**
  * Servlet implementation class KaikeiServlet
  */
-@WebServlet("/kaikei")
-public class KaikeiServlet extends HttpServlet {
+@WebServlet("/main")
+public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KaikeiServlet() {
+    public MainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +29,8 @@ public class KaikeiServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-//		RequestDispatcher d= request.getRequestDispatcher("/WEB-INF/jsp/kaikei.jsp");
-//		d.forward(request, response);
-//		String ordertotal = request.getParameter("ordertotal");
-		String ordertotal ="1234";
-		Data data = new Data();
-		data.setOrderTotal(Integer.parseInt(ordertotal));
-		request.setAttribute("data", data);
 
-
-//		PrintWriter out = response.getWriter();
-//		out.println("<!DOCTYPE html>");
-//		out.println("<html>");
-//		out.println("<head>");
-//		out.println("<title> sample2 </title>");
-//		out.println("</head>");
-//		out.println("<body>");
-//		out.println("this is result"+ordertotal);
-		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/jsp/kaikei.jsp");
+		RequestDispatcher d = request.getRequestDispatcher("/WEB-INF/HTML/main.html");
 		d.forward(request, response);
 	}
 
