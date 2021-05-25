@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <title>会計画面</title>
     <link rel="stylesheet" href="/iceshop/statics/css/style.css">
-    <link href="src/main/webapp/statics/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/iceshop/statics/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -128,7 +128,7 @@
             </tbody>
         </table>
     <div class="text-right" id="confirm">
-        <a href="https://localhost:8080/iceshop/Receipt">
+        <a href="https://localhost:8080/iceshop/Recipt">
         <button type="button" class="btn btn-outline-danger" style="font-size:20px; width:100px; height:50px; margin-top:-150px; margin-left:700px">確定</button>
         </a>
     </div>
