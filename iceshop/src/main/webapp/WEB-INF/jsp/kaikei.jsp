@@ -17,32 +17,41 @@
 
 <body class="border border-dark" style="margin:auto; margin-top:17px; padding:18px;  width:1100px; height:700px;">
     <script>
-        function dis(val) {
-            document.getElementById("result").value += val
+    function dis(val) {
+        document.getElementById("result").value += val
+        var event = new Event('change', { bubbles: true });
+        document.getElementById("result").dispatchEvent(event);
+    }
+    // String型からint型に変換： var b= + value;
+    function getResult(result) {
+            var result = result+0;
+            return result;
+    }
+    //CLEARボタンの動作
+    function clr() {
+        document.getElementById("result").value = ""
+        	var event = new Event('change', { bubbles: true });
+        	document.getElementById("result").dispatchEvent(event);
+    }
+    //バックスペースボタンの動作
+    function bs() {
+        var b = document.getElementById("result").value;
+        if (b.length != 0) {
+           b= b.substring(0,b.length-1)
         }
-        // String型からint型に変換： var b= + value;
-        function getResult(result) {
-                var result = result+0;
-                return result;
-        }
-        //CLEARボタンの動作
-        function clr() {
-            document.getElementById("result").value = ""
-        }
-        //バックスペースボタンの動作
-        function bs() {
-            var b = document.getElementById("result").value;
-            if (b.length != 0) {
-               b= b.substring(0,b.length-1)
-            }
-            document.getElementById("result").value =b;
-        }
-        function otsuriKeisan(){
-        	var ordertotal = <%= data.getOrderTotal() %>
-        	var otsuri = parseInt(document.getElementById("goukei").value) - ordertotal
-        	document.getElementById("otsuri").innerText = otsuri
+        document.getElementById("result").value =b;
+        var event = new Event('change', { bubbles: true });
+        document.getElementById("result").dispatchEvent(event);
+    }
+    function otsuriKeisan(){
+    	var otsuri = parseInt(document.getElementById("result").value) - parseInt(document.getElementById("goukei").innerText)
+    	if(otsuri>0){
+        	document.getElementById("otsuri").value = otsuri
+    	}else{
+        	document.getElementById("otsuri").value = 0
+    	}
+    }
 
-        }
 
         <%--
         getElementbyID("otsuri").innerHTML= <%=document.getElementById("result").value%>- <%= data.getOrderTotal() %>
@@ -56,7 +65,6 @@
             <tr>
 		<th>合計金額</th>
 		<td><span id="goukei"><%= data.getOrderTotal() %></span><span>円</span> </td>
-
             </tr>
             <tr>
             <th>受取金額</th>
@@ -64,7 +72,7 @@
             </tr>
             <tr>
             <th >釣銭</th>
-                <td><span id="otsuri"></span><span>円</span></td>
+                <td><input type="number" name="otsuri"id="otsuri">円</td>
             </tr>
         </table>
 
