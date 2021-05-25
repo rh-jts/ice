@@ -2,12 +2,6 @@ package database;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,11 +28,12 @@ public class DataBaseCon extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			// Class.forName("com.mysql.jdbc.Driver");
 
 			PrintWriter out = response.getWriter();
 			out.println("<!DOCTYPE html>");
@@ -48,13 +43,14 @@ public class DataBaseCon extends HttpServlet {
 			out.println("</head>");
 			out.println("<body>");
 
-			Connection con = (Connection) DriverManager.getConnection(
-					"jdbc:mysql://localhost/iceshop?serverTimezone=JST&useUnicode=true&characterEncoding=UTF-8",
-					"root", "root");//データベースの情報
-			Statement stmt = con.createStatement();
+//			Connection con = (Connection) DriverManager.getConnection(
+//					"jdbc:mysql://localhost/iceshop?serverTimezone=JST&useUnicode=true&characterEncoding=UTF-8",
+//					"root", "root");//データベースの情報
+//			Statement stmt = con.createStatement();
 
 
 			// ordersテーブルの消費税(tax_id)に#####をUPDATEする
+			/*
             String sql1 = "UPDATE taxs SET tax_id = ##### where tax_name='テイクアウト'";
             int num1 = stmt.executeUpdate(sql1);
             ResultSet rs1 = stmt.executeQuery(sql1);
@@ -90,83 +86,21 @@ public class DataBaseCon extends HttpServlet {
             ResultSet rs7 = stmt.executeQuery(sql7);
 
 
-			//主キーと外部キーの設定
-			//orderに格納
-			String paym = "INSERT INTO orders(paymethod_id) SELECT paymethod_id from paymethods";
-			String disc = "INSERT INTO orders(discount_id) SELECT discount_id from discounts";
-			String tax = "INSERT INTO orders(tax_id) SELECT tax_id from taxs";
-			//productsに格納
-			String ord1 = "INSERT INTO products(order_id) SELECT order_id from orders";
-			String icen1 = "INSERT INTO products(icenum_id) SELECT icenum_id from icenums";
-			String cont = "INSERT INTO products(container_id) SELECT container_id from containers";
-			//detailisに格納
-			String ord2 = "INSERT INTO details(product_id) SELECT product_id from products";
-			String flv = "INSERT INTO details(flavor_id) SELECT flavor_id from flavors";
-			String siz1 = "INSERT INTO details(size_id) SELECT size_id from sizess";
-			//pricesに格納
-			String siz2 = "INSERT INTO prices(size_id) SELECT size_id from sizes";
-			String icen2 = "INSERT INTO prices(order_icenum) SELECT icenum_id from icenums";
-
-			//更新
-			int upd = stmt.executeUpdate(paym);
-			int upd2 = stmt.executeUpdate(disc);
-			int upd3 = stmt.executeUpdate(tax);
-			int upd4 = stmt.executeUpdate(ord1);
-			int upd5 = stmt.executeUpdate(icen1);
-			int upd6 = stmt.executeUpdate(cont);
-			int upd7 = stmt.executeUpdate(ord2);
-			int upd8 = stmt.executeUpdate(flv);
-			int upd9 = stmt.executeUpdate(siz1);
-			int upd10 = stmt.executeUpdate(siz2);
-			int upd11 = stmt.executeUpdate(icen2);
-
-			//レシート画面に出力するアイスの情報
-			String flvinfo = "SELECT details.flavor_id, flavor_name from details,flavors where details.flavor_id=flavors.flavor_id";
-			String sizinfo = "SELECT details.size_id, size_name from details,sizes where details.size_id=sizes.size_id";
-			String iceinfo = "SELECT products.icenum_id, icenum_name from products where products.icenum_id = icenums.icenum_id";
-			String coninfo = "SELECT products.containe_id, container_name from products where products.container_id = containers.container_id";
-
-			//PreparedStatementのインスタンスを作成
-			PreparedStatement pstmt1 = con.prepareStatement(flvinfo);
-			PreparedStatement pstmt2 = con.prepareStatement(sizinfo);
-			PreparedStatement pstmt3 = con.prepareStatement(iceinfo);
-			PreparedStatement pstmt4 = con.prepareStatement(coninfo);
-
-			//ResultSetインスタンスにSELECT文の内容を格納
-			ResultSet infoset1 = pstmt1.executeQuery();
-			ResultSet infoset2 = pstmt2.executeQuery();
-			ResultSet infoset3 = pstmt3.executeQuery();
-			ResultSet infoset4 = pstmt4.executeQuery();
-
-			while (rs1.next()) { //フレーバーの数だけ繰り返す
-				//---idに---_nameを格納する
-				String flvid = infoset1.getString("flavor_name");
-				String sizid = infoset2.getString("size_name");
-				String iceid = infoset3.getString("icenum_name");
-				String conid = infoset4.getString("container_name");
-
-				//"xxxxx"という名前に---idを格納し、レシート画面に送信する。
-				request.setAttribute("flvaor", flvid);
-				request.setAttribute("size", sizid);
-				request.setAttribute("icenum", iceid);
-				request.setAttribute("container", conid);
-
-				RequestDispatcher recrd = request.getRequestDispatcher("//レシート画面のURL");
-				recrd.forward(request, response);
-			}
-
 			out.println("</body>");
 			out.println("</html>");
-			
-			
-			
 
-		} catch (SQLException e) {
-			System.out.println("MySQLに接続できませんでした。");
-			System.out.println(e.getMessage());
+*/
+			// クレジット画面へ遷移
+			String credit_url = "/WEB-INF/jsp/CreditCard.jsp";
+			RequestDispatcher rd = request.getRequestDispatcher(credit_url);
+			rd.forward(request, response);
+
+//		} catch (SQLException e) {
+//			System.out.println("MySQLに接続できませんでした。");
+//			e.printStackTrace();
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		    e.printStackTrace();
 		}
 
 	}
@@ -174,10 +108,15 @@ public class DataBaseCon extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	@Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+
+        // 現金画面へ遷移
+        String cash_url = "/WEB-INF/jsp/kaikei.jsp";
+        RequestDispatcher rd = request.getRequestDispatcher(cash_url);
+        rd.forward(request, response);
 
 	}
 

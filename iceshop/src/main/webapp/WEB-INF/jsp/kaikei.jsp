@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <title>会計画面</title>
-    <link rel="stylesheet" href="src/main/webapp/statics/css/style.css">
+    <link rel="stylesheet" href="/iceshop/statics/css/style.css">
     <link href="src/main/webapp/statics/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
