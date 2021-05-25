@@ -162,7 +162,7 @@ public class DataBaseConR extends HttpServlet {
 			out.println("</body>");
 			out.println("</html>");
 
-			RequestDispatcher recrd = request.getRequestDispatcher("/WEB-INF/jsp/CreditCard.jsp");
+			RequestDispatcher recrd = request.getRequestDispatcher("/WEB-INF/jsp/Receipt.jsp");
 			recrd.forward(request, response);
 
 
