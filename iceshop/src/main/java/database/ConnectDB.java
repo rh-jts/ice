@@ -43,6 +43,11 @@ public class ConnectDB extends HttpServlet {
 			out.println("<title> sample2 </title>");
 			out.println("</head>");
 			out.println("<body>");
+			
+			
+			
+			
+			
 
 			Connection con = (Connection) DriverManager.getConnection(
 					"jdbc:mysql://localhost/iceshop?serverTimezone=JST&useUnicode=true&characterEncoding=UTF-8",

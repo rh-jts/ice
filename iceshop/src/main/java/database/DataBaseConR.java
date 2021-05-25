@@ -129,7 +129,6 @@ public class DataBaseConR extends HttpServlet {
 			String iceinfo = "SELECT products.icenum_id, icenum_name from products where products.icenum_id = icenums.icenum_id";
 			String coninfo = "SELECT products.containe_id, container_name from products where products.container_id = containers.container_id";
 			String gouinfo ="SELECT order_total_amount from orders ";
-			String shoinfo  ="SELECT "
 
 
 
