@@ -61,6 +61,7 @@
         <a href="https://stackoverflow.com/">
         <button id="backButton" type="button" class="btn btn-outline-primary" >戻る</button>
         </a>
+        <form action="/Receipt.jsp" method="post">
         <table class="table table-striped" id="money">
             <tr>
 		<th>合計金額</th>
@@ -129,8 +130,9 @@
         </table>
     <div class="text-right" id="confirm">
         <a href="http://localhost:8080/iceshop/receipt">
-        <button type="button" class="btn btn-outline-danger" style="font-size:20px; width:100px; height:50px; margin-top:-150px; margin-left:700px">確定</button>
+        <input type="submit" class="btn btn-outline-danger" style="font-size:20px; width:100px; height:50px; margin-top:-150px; margin-left:700px" value="確定">
         </a>
     </div>
+    </form>
 </body>
 </html>

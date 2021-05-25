@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="database.ReciptMid" %>    
-<%  ReciptMid reinfo = (ReciptMid)request.getAttribute("recinfo"); %>    
-    
-    
+<%@ page import="database.ReciptMid" %>
+<%  ReciptMid reinfo = (ReciptMid)request.getAttribute("recinfo"); %>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -65,7 +65,7 @@
 			<td>アイス1</td>
 			<td>500</td>
 			</tr>
-			
+
 		</tbody>
 	</table>
 
