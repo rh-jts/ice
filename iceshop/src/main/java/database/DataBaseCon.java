@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class DataBaseCon
  */
-@WebServlet("/DataBaseCon")
+@WebServlet("/DBC")
 public class DataBaseCon extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
