@@ -42,6 +42,16 @@ class Products {
     this.products.push(p);
   };
 
+  getOrderdAmount = () => {
+    let total_orderd_amount = 0;
+    this.products.forEach(v => {
+      if (v.is_active === true) {
+        total_orderd_amount += v.quantity;
+      }
+    })
+    return total_orderd_amount;
+  }
+
   redrawTotals = () => {
     this.subtotal = 0;
     this.total = 0;
@@ -62,6 +72,8 @@ class Products {
 
   changeProductQuantity = (product_num, is_plus) => {
     if (!is_plus && this.products[product_num].quantity <= 1) return;
+    let amount = this.getOrderdAmount();
+    if (amount >= 10 && is_plus) return;
     this.products[product_num].quantity += is_plus ? 1 : -1;
 
     document.getElementById(`qua_${product_num}`).innerText =
@@ -109,7 +121,11 @@ class Products {
 
   // アイス情報を送信用JSONに整形する
   formatProducts = () => {
-    let formatted_products = { "ices": [], "tax_discounts": this.extras, "total" : this.total};
+    let formatted_products = {
+      ices: [],
+      tax_discounts: this.extras,
+      total: this.total,
+    };
     Object.values(this.products).forEach((v, i) => {
       if (v.is_active == true) {
         formatted_products.ices[i] = v;
@@ -159,8 +175,7 @@ class order {
     this.quantity = quantity;
     this.ices = ices;
     this.price = price;
-    if (container == 3) this.price += 40;
-
+    if (container == 2) this.price += 40;
     this.insertRow();
   }
 
@@ -211,12 +226,14 @@ class order {
       .addEventListener("click", () => {
         ice.changeProductQuantity(order_number, true);
         ice.redrawTotals();
+        toggleButtonActive();
       });
     document
       .getElementById(`min_${order_number}`)
       .addEventListener("click", () => {
         ice.changeProductQuantity(order_number, false);
         ice.redrawTotals();
+        toggleButtonActive();
       });
     document
       .getElementById(`del_${order_number}`)
@@ -251,8 +268,10 @@ const tax = [8, 10];
 
 off.forEach((a) => {
   document.getElementById(`${a}_off`).addEventListener("click", () => {
-    ice.extras[0] = a;
-    ice.redrawTotals();
+
+      ice.extras[0] = a;
+      ice.redrawTotals();
+
   });
 });
 tax.forEach((a) => {
@@ -271,7 +290,6 @@ document.getElementById("clear_extras").addEventListener("click", () => {
 ice.container_names.forEach((a, i) => {
   document.getElementById(`cup_${i + 1}`).addEventListener("click", () => {
     ice.current_ice.container = i;
-    console.log(ice.current_ice.container);
     redrawBread(3);
   });
 });
@@ -445,21 +463,31 @@ redrawModalNextButton = () => {
 
 // アイス個数ボタン設定
 for (let i = 1; i <= 3; i++) {
-  document.getElementById(`icenum_${i}`).addEventListener("click", () => {
-    ice.setCurrentIceNull();
-    setModalButtons(i);
-    ice.current_ice.num = i;
-    ice.selecting = 1;
-    if (i == 3) {
-      ice.current_ice.flavor_size.forEach((a) => {
-        a[1] = 1;
-      });
-    }
-    redrawModalNextButton();
+  document.getElementById(`icenum_${i}`).addEventListener(
+    "click",
+    (event) => {
+      const btn = event.currentTarget;
 
-    // パンくずの現在位置を1に指定
-    redrawBread(1);
-  });
+      if (btn.getAttribute("aria-disabled") === "true") {
+        return false;
+      } else {
+        ice.setCurrentIceNull();
+        setModalButtons(i);
+        ice.current_ice.num = i;
+        ice.selecting = 1;
+        if (i == 3) {
+          ice.current_ice.flavor_size.forEach((a) => {
+            a[1] = 1;
+          });
+        }
+        redrawModalNextButton();
+
+        // パンくずの現在位置を1に指定
+        redrawBread(1);
+      }
+    },
+    false
+  );
 }
 
 // モーダルのアイス情報描画
@@ -511,35 +539,126 @@ redrawBread = (position) => {
       '<li class="breadcrumb-item">  ' + container_name + "</li>"
     );
   }
+
+  ice.current_position = position;
+  toggleButtonActive();
 };
 
-// 追加ボタン設定
-document.getElementById("btn_add").addEventListener("click", () => {
-  let ice_object;
-  let double_combine = 0;
-  let ice_size = ice.current_ice.flavor_size[0][1];
+// ボタン有効・無効化
+toggleButtonActive = () => {
+  let position = ice.current_position;
+  let num_buttons = [];
+  let cup_buttons = [];
+  let pay_buttons = [];
+  let add_button = document.getElementById("btn_add");
 
-  if (ice.current_ice.num == 2) {
-    if (
-      ice.current_ice.flavor_size[0][1] == ice.current_ice.flavor_size[1][1]
-    ) {
-      double_combine = 1;
-    } else {
-      double_combine = 2;
-    }
+  for (let i = 1; i <= 3; i++) {
+    num_buttons[i] = document.getElementById(`icenum_${i}`);
+    cup_buttons[i] = document.getElementById(`cup_${i}`);
+  }
+  pay_buttons[0] = document.getElementById("credit");
+  pay_buttons[1] = document.getElementById("cash");
+
+  // disabled属性を一括削除
+  num_buttons.forEach((b) => {
+    b.classList.remove("disabled");
+    b.removeAttribute("aria-disabled");
+  })
+  cup_buttons.forEach((b) => {
+    b.classList.remove("disabled");
+    b.removeAttribute("aria-disabled");
+  })
+  pay_buttons.forEach((b) => {
+    b.classList.remove("disabled");
+    b.removeAttribute("aria-disabled");
+  })
+  add_button.classList.remove("disabled");
+  add_button.removeAttribute("aria-disabled");
+
+  // 現在地別ボタン有効無効処理
+  if (position <= 1) {
+    cup_buttons.forEach((b) => {
+      b.classList.add("disabled");
+      b.setAttribute("aria-disabled", true);
+    })
+    add_button.classList.add("disabled");
+    add_button.setAttribute("aria-disabled", true);
+  }
+  else {
+    num_buttons.forEach((b) => {
+      b.classList.add("disabled");
+      b.setAttribute("aria-disabled", true);
+    })
+  }
+  if (ice.current_ice.num >= 3) {
+    cup_buttons[1].classList.add("disabled");
+    cup_buttons[3].classList.add("disabled");
+    cup_buttons[1].setAttribute("aria-disabled", true);
+    cup_buttons[3].setAttribute("aria-disabled", true);
   }
 
-  let price = ice.getPrice(ice_size, ice.current_ice.num, double_combine);
+  // 注文数別ボタン有効無効処理
+  let total_orderd_amount = 0;
+  ice.products.forEach(v => {
+    if (v.is_active === true) {
+      total_orderd_amount += v.quantity;
+    }
+  })
+  // 合計注文数が1未満なら支払いボタンを無効化
+  if (total_orderd_amount < 1) {
+    pay_buttons.forEach((b) => {
+      b.classList.add("disabled");
+      b.setAttribute("aria-disabled", true);
+    })
+  }
+  // 合計注文数が10以上なら追加ボタンを無効化
+  if (total_orderd_amount >= 10) {
+    add_button.classList.add("disabled");
+    add_button.setAttribute("aria-disabled", true);
+  }
 
-  let to = new order(
-    ice.current_ice.num,
-    ice.current_ice.container,
-    1,
-    ice.current_ice.flavor_size,
-    price
-  );
-  ice.clearCurrentIce();
+};
+
+
+// 追加ボタン設定
+document.getElementById("btn_add").addEventListener("click", (event) => {
+  const btn = event.currentTarget;
+
+  if (btn.getAttribute("aria-disabled") === "true") {
+    return false;
+
+  } else {
+    
+
+    let ice_object;
+    let double_combine = 0;
+    let ice_size = ice.current_ice.flavor_size[0][1];
+
+    if (ice.current_ice.num == 2) {
+      if (
+        ice.current_ice.flavor_size[0][1] == ice.current_ice.flavor_size[1][1]
+      ) {
+        double_combine = 1;
+      } else {
+        double_combine = 2;
+      }
+    }
+
+    let price = ice.getPrice(ice_size, ice.current_ice.num, double_combine);
+
+    let to = new order(
+      ice.current_ice.num,
+      ice.current_ice.container,
+      1,
+      ice.current_ice.flavor_size,
+      price
+    );
+    ice.clearCurrentIce();
+    redrawBread(0);
+  }
 });
+
+redrawBread(0);
 
 // 支払いボタン設定
 document.getElementById("cash").addEventListener("click", () => {
@@ -553,6 +672,12 @@ document.getElementById("credit").addEventListener("click", () => {
 let myModal = document.getElementById("myModal");
 let myInput = document.getElementById("myInput");
 
-myModal.addEventListener("shown.bs.modal", () => {
-  myInput.focus();
+myModal.addEventListener("shown.bs.modal", (event) => {
+  const btn = event.currentTarget;
+
+  if (btn.getAttribute("aria-disabled") === "true") {
+    return false;
+  } else {
+    myInput.focus();
+  }
 });
