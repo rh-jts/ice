@@ -50,8 +50,11 @@
     	}else{
         	document.getElementById("otsuri").value = 0
     	}
+    	
+    	//受取金額をsession storageに保存
+    	const recieved_amount = parseInt(document.getElementById("result").value);
+    	sessionStorage.setItem("recieved_amount", recieved_amount);
     }
-
 
         <%--
         getElementbyID("otsuri").innerHTML= <%=document.getElementById("result").value%>- <%= data.getOrderTotal() %>

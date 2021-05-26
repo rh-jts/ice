@@ -2,6 +2,7 @@ package ajax;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -98,6 +99,13 @@ public class RecieveIceDatas extends HttpServlet {
 					stmt.executeUpdate(add_detail_sql);
 				}
 			}
+			
+			//response.setContentType("application/json");
+			response.setContentType("text/plain");
+			response.setHeader("Cache-Control", "nocache");
+			response.setCharacterEncoding("utf-8");
+			PrintWriter out = response.getWriter();
+			out.print("JSON recieved.");
 
 		} catch (Exception e) {
 			e.printStackTrace();

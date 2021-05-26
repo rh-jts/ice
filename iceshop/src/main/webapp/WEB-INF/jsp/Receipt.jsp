@@ -58,11 +58,11 @@
     <br />
     <br />
     <p style="text-align: left">受取金</p>
-    <h2 id="receip" style="text-align: right"><%=uketori %>円</h2>
+    <h2 id="recieved" style="text-align: right"></h2>
     <br />
     <br />
     <p style="text-align: left">釣り銭</p>
-    <h2 id="change" style="text-align: right"><%=otsuri %>円</h2>
+    <h2 id="change" style="text-align: right"></h2>
     <hr />
     <br />
     <br />
@@ -146,19 +146,26 @@
 
         table_body.insertAdjacentHTML("beforeend", row_html);
 
-        subtotal_price += v.price;
+        subtotal_price += v.price * v.quantity;
       });
 
       let diff = subtotal_price - ice_data.total;
       tax_price = parseInt(subtotal_price * (parseFloat(ice_data.tax_discounts[1]) / 100));
       let discount_price = diff + tax_price;
+      const recieved_amount = sessionStorage.recieved_amount;
+      const change_amount = recieved_amount - ice_data.total;
+      console.log("ice_data.total : " + ice_data.total);
+      console.log("recieved_amount : " + recieved_amount);
 
       document.getElementById("date").innerText = today_string;
       document.getElementById("subtotal").innerText = subtotal_price + "円";
       document.getElementById("tax").innerText = tax_price + "円";
       document.getElementById("afterDiscount").innerText = discount_price + "円";
       document.getElementById("final").innerText = ice_data.total + "円";
-
+      document.getElementById("recieved").innerText = recieved_amount + "円";
+      document.getElementById("change").innerText = change_amount + "円";
+      
+      sessionStorage.clear();
     </script>
   </body>
 </html>
