@@ -58,7 +58,7 @@
     --%>
     </script>
 
-        <a href="http://localhost:8080/iceshop/main">
+        <a href="http://localhost:8080/iceshop/receipt">
         <button id="backButton" type="button" class="btn btn-outline-primary" >戻る</button>
         </a>
 
