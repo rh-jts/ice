@@ -161,6 +161,9 @@ class Products {
       .catch((e) => {
         console.error(e);
       });
+
+      sessionStorage.clear();
+      sessionStorage.setItem("ice_data", submit_body_json);
   };
 }
 
