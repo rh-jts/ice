@@ -58,7 +58,7 @@ div.right{text-align:right;}
       font-weight:bold;"
       onmouseover="this.style.background='#00ffff'"
       onmouseout="this.style.background='#0066ff'"
-      onclick="location.href='http://abehiroshi.la.coocan.jp/'" >
+      onclick="location.href='http://localhost:8080/iceshop/main'" >
       <!-- クリックしたらメイン画面に戻る -->
       <!-- 今の設定だと阿部寛のHPに飛んでしまうので書き換えが必要 -->
 
@@ -111,9 +111,9 @@ div.right{text-align:right;}
         font-weight: bold;"
         onmouseover="this.style.background='#ff0000'"
         onmouseout="this.style.background='#ff9999'"
-        onclick="location.href='http://abehiroshi.la.coocan.jp/'" >
+        onclick="location.href='http://localhost:8080/iceshop/receipt'" >
       <!-- クリックしたらレシート画面に進む -->
-      <!-- 今の設定だと阿部寛のHPに飛んでしまうので書き換えが必要 -->
+
 
         決定
       </button>
