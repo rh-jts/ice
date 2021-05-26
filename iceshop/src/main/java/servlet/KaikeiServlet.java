@@ -39,7 +39,10 @@ public class KaikeiServlet extends HttpServlet {
 		//		RequestDispatcher d= request.getRequestDispatcher("/WEB-INF/jsp/kaikei.jsp");
 		//		d.forward(request, response);
 		//		String ordertotal = request.getParameter("ordertotal");
+		
+		
 		try {
+			Thread.sleep(2000);
 			// DB接続処理
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = (Connection) DriverManager.getConnection(

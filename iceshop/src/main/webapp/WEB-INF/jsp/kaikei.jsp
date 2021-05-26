@@ -129,7 +129,7 @@
             </tbody>
         </table>
     <div class="text-right" id="confirm">
-        <a href="http://localhost:8080/iceshop/receipt">
+        <a href="http://localhost:8080/iceshop/SoushinServelt">
         <input type="submit" class="btn btn-outline-danger" style="font-size:20px; width:100px; height:50px; margin-top:-150px; margin-left:700px" value="確定">
         </a>
     </div>
