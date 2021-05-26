@@ -51,13 +51,13 @@ div.right{text-align:right;}
     <!-- 戻るボタンの設定 -->
     <div class="left">
      <button type="button"
-      class="btn btn-primary"
+      class="btn btn-outline-primary"
       style="width:110px;
       height:50px;
       font-size:25px;
       font-weight:bold;"
       onmouseover="this.style.background='#00ffff'"
-      onmouseout="this.style.background='#0066ff'"
+      onmouseout="this.style.background='#ffffff'"
       onclick="location.href='http://localhost:8080/iceshop/main'" >
       <!-- クリックしたらメイン画面に戻る -->
       <!-- 今の設定だと阿部寛のHPに飛んでしまうので書き換えが必要 -->
@@ -84,14 +84,14 @@ div.right{text-align:right;}
     <!-- 1回ボタンを設定 -->
     <div class="center2">
       <button type="button"
-        class="btn btn-info"
+        class="btn btn-outline-info"
         id="button1"
         style="width:180px;
         height:50px;
         font-size:25px;
         font-weight:bold;"
         onmouseover="this.style.background='#00ffff'"
-        onmouseout="this.style.background='#00ccff'"
+        onmouseout="this.style.background='#ffffff'"
         onclick="this.style.background='#ccffff';func1();">
         1回
       </button>
@@ -102,7 +102,7 @@ div.right{text-align:right;}
     <!-- 決定ボタンを設定 -->
     <div class="right">
       <button type="button"
-        class="btn btn-danger"
+        class="btn btn-outline-danger"
         id="button2"
         disabled
         style="width:110px;
@@ -110,7 +110,7 @@ div.right{text-align:right;}
         font-size: 25px;
         font-weight: bold;"
         onmouseover="this.style.background='#ff0000'"
-        onmouseout="this.style.background='#ff9999'"
+        onmouseout="this.style.background='#ffffff'"
         onclick="location.href='http://localhost:8080/iceshop/receipt'" >
       <!-- クリックしたらレシート画面に進む -->
 
