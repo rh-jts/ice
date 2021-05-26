@@ -1,13 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import database.ReciptMid;
 
 
 @WebServlet("/receipt")
@@ -38,6 +29,7 @@ public class ReceiptServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 
 		try {
+			/*
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			PrintWriter out = response.getWriter();
@@ -53,7 +45,7 @@ public class ReceiptServlet extends HttpServlet {
 					"root", "root");//データベースの情報
 			Statement stmt = con.createStatement();
 
-/*
+
 			// ordersテーブルの消費税(tax_id)に#####をUPDATEする
             String sql1 = "UPDATE taxs SET tax_id = ##### where tax_name='テイクアウト'";
             int num1 = stmt.executeUpdate(sql1);
@@ -88,7 +80,7 @@ public class ReceiptServlet extends HttpServlet {
             String sql7 = "UPDATE products SET product_quantity = ##### WHERE product_id = 1 IS NULL";
             int num7 = stmt.executeUpdate(sql7);
             ResultSet rs7 = stmt.executeQuery(sql7);
-            */
+            
 
 
 			//主キーと外部キーの設定
@@ -164,14 +156,12 @@ public class ReceiptServlet extends HttpServlet {
 
 		//	String gouid = infoset5.getString("order_total_amount");
 			//goukei g = new goukei("goukei",gouid);
+			 * 
+			 */
 
 			RequestDispatcher recrd = request.getRequestDispatcher("/WEB-INF/jsp/Receipt.jsp");
 			recrd.forward(request, response);
 
-
-		} catch (SQLException e) {
-			System.out.println("レシート画面でエラー");
-			System.out.println(e.getMessage());
 
 		} catch (Exception e) {
 			e.printStackTrace();

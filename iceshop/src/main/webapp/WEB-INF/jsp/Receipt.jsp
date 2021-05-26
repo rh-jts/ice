@@ -152,10 +152,8 @@
       let diff = subtotal_price - ice_data.total;
       tax_price = parseInt(subtotal_price * (parseFloat(ice_data.tax_discounts[1]) / 100));
       let discount_price = diff + tax_price;
-      const recieved_amount = sessionStorage.recieved_amount;
+      const recieved_amount = (isNaN(sessionStorage.recieved_amount) || sessionStorage.recieved_amount == null) ? ice_data.total : sessionStorage.recieved_amount;
       const change_amount = recieved_amount - ice_data.total;
-      console.log("ice_data.total : " + ice_data.total);
-      console.log("recieved_amount : " + recieved_amount);
 
       document.getElementById("date").innerText = today_string;
       document.getElementById("subtotal").innerText = subtotal_price + "円";
