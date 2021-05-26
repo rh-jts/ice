@@ -52,6 +52,7 @@ public class KaikeiServlet extends HttpServlet {
 			rs.next();
 			int ordertotal = rs.getInt("order_total_amount");
 			System.out.println("最新合計金額 : " + ordertotal);
+			//comment
 			Data data = new Data();
 			data.setOrderTotal(ordertotal);
 			request.setAttribute("data", data);
