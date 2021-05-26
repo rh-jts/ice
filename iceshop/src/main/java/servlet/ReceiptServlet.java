@@ -90,7 +90,7 @@ public class ReceiptServlet extends HttpServlet {
             ResultSet rs7 = stmt.executeQuery(sql7);
             */
 
-/*
+
 			//主キーと外部キーの設定
 			//orderに格納
 			String paym = "INSERT INTO orders(paymethod_id) SELECT paymethod_id from paymethods";
@@ -121,13 +121,13 @@ public class ReceiptServlet extends HttpServlet {
 			int upd10 = stmt.executeUpdate(siz2);
 			int upd11 = stmt.executeUpdate(icen2);
 
-*/
+
 			//レシート画面に出力するアイスの情報
 			String flvinfo = "SELECT details.flavor_id, flavor_name from details,flavors where details.flavor_id=flavors.flavor_id";
 			String sizinfo = "SELECT details.size_id, size_name from details,sizes where details.size_id=sizes.size_id";
 			String iceinfo = "SELECT products.icenum_id, icenum_name from products,icenums where products.icenum_id = icenums.icenum_id";
 			String coninfo = "SELECT products.container_id, container_name from products, containers where products.container_id = containers.container_id";
-			String gouinfo ="SELECT order_total_amount from orders ";
+		//	String gouinfo ="SELECT order_total_amount from orders ";
 
 
 
@@ -137,14 +137,14 @@ public class ReceiptServlet extends HttpServlet {
 			PreparedStatement pstmt2 = con.prepareStatement(sizinfo);
 			PreparedStatement pstmt3 = con.prepareStatement(iceinfo);
 			PreparedStatement pstmt4 = con.prepareStatement(coninfo);
-			PreparedStatement pstmt5 = con.prepareStatement(gouinfo);
+		//	PreparedStatement pstmt5 = con.prepareStatement(gouinfo);
 
 			//ResultSetインスタンスにSELECT文の内容を格納
 			ResultSet infoset1 = pstmt1.executeQuery();
 			ResultSet infoset2 = pstmt2.executeQuery();
 			ResultSet infoset3 = pstmt3.executeQuery();
 			ResultSet infoset4 = pstmt4.executeQuery();
-			ResultSet infoset5 = pstmt5.executeQuery();
+	//		ResultSet infoset5 = pstmt5.executeQuery();
 
 			while (infoset1.next()) { //フレーバーの数だけ繰り返す
 				//---idに---_nameを格納する
@@ -170,7 +170,7 @@ public class ReceiptServlet extends HttpServlet {
 
 
 		} catch (SQLException e) {
-			System.out.println("MySQLに接続できませんでした。");
+			System.out.println("レシート画面でエラー");
 			System.out.println(e.getMessage());
 
 		} catch (Exception e) {
