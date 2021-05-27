@@ -243,6 +243,7 @@ class order {
       .addEventListener("click", () => {
         document.getElementById(`row_${order_number}`).remove();
         ice.products[order_number].is_active = false;
+        console.log("order_number : " + order_number);
         ice.redrawTotals();
       });
 

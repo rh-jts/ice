@@ -71,7 +71,14 @@
 
 
     <script>
-      const ice_data = JSON.parse(sessionStorage.ice_data);
+      const ids = JSON.parse(sessionStorage.ice_data);
+      let ice_data = {"ices" : [], "tax_discounts" : ids.tax_discounts, "total" : ids.total};
+      ids.ices.forEach(v => {
+        if (v != null) {
+        ice_data.ices.push(v);
+        }
+      });
+
       const table_body = document.getElementById("table_body");
 
       const cup_names = ["コーン", "カップ", "ワッフル"];
