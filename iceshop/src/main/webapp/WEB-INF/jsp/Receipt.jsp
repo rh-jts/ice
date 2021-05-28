@@ -174,7 +174,7 @@
     </script>
 
         <div class="text-right" id="confirm">
-        <a href="/WEB-INF/HTML/main.html">
+        <a href="http://localhost:8080/iceshop/main">
         <input type="submit" class="btn btn-outline-danger float-end"  value="次の会計へ">
         <br><br>
         </a>
