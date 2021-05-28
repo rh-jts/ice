@@ -169,8 +169,16 @@
       document.getElementById("final").innerText = ice_data.total + "円";
       document.getElementById("recieved").innerText = recieved_amount + "円";
       document.getElementById("change").innerText = change_amount + "円";
-      
+
       sessionStorage.clear();
     </script>
+
+        <div class="text-right" id="confirm">
+        <a href="/WEB-INF/HTML/main.html">
+        <input type="submit" class="btn btn-outline-danger float-end"  value="次の会計へ">
+        <br><br>
+        </a>
+    </div>
+
   </body>
 </html>
